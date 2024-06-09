@@ -1,0 +1,81 @@
+ /* 公共样式 */
+ .share-button-container {
+   display: flex;
+   /* 使用 flex 布局，使按钮水平排列 */
+   gap: 20px;
+   /* 设置按钮之间的间距，可以根据需要调整 */
+ }
+
+ .share-button-container button {
+   font-size: 16px;
+   padding: 10px 20px;
+   cursor: pointer;
+   border: none;
+   border-radius: 5px;
+ }
+
+
+ /* 分享按钮样式 */
+ .share-button {
+   background-color: #2b6963;
+   color: #b0decf;
+ }
+
+
+ .support-button {
+   cursor: pointer;
+   background-color: #2b6963;
+   color: #b0decf;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   font-size: 16px;
+ }
+
+ #support-dialog {
+   display: none;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: rgb(43, 105, 99);
+   padding: 20px;
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(24, 28, 39);
+   z-index: 1;
+ }
+
+
+ #image-container {
+   display: flex;
+   justify-content: space-evenly;
+   margin-bottom: 15px;
+ }
+
+ #image-container img {
+   max-width: 30%;
+   height: auto;
+   border-radius: 15px;
+ }
+
+ .close-button {
+   cursor: pointer;
+   background-color: #f44336;
+   color: white;
+   padding: 10px 15px;
+   border: none;
+   border-radius: 5px;
+   font-size: 14px;
+   margin: top 2rm;
+ }
+
+ .like-p {
+   text-align: center
+ }
+
+ @media(prefers-color-scheme: dark) {
+   .like-p {
+     color: black;
+     text-align: center
+   }
+ }

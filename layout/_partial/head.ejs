@@ -1,0 +1,97 @@
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	<% 
+		var title = page.title; 
+		if ( title == '' ) {
+			var title = page.slug.split("/")[page.slug.split("/").length-1]
+		}else {
+			var title = page.title; 
+		};
+	%>
+	<title>
+	<% if (title){ %>
+		<%= title %> | 
+	<% } %> 
+	<%= config.title %>
+	</title>
+	
+	<!-- keywords,description -->
+	<% if (page.keywords){ %>
+		<meta name="keywords" content="<%= page.keywords %>,<%= config.keywords %>" />
+	<% } else if (config.keywords){ %>
+		<meta name="keywords" content="<%= config.keywords %>" />
+	<% } %>
+	<% if (page.description){ %>
+		<meta name="description" content="<%= page.description %>" />
+	<% } else if (config.description){ %>
+		<meta name="description" content="<%= config.description %>" />
+	<% } %>
+
+	<!-- favicon -->
+	<% if (theme.favicon){ %>
+	<%- favicon_tag(theme.favicon) %>
+	<% } %>
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "<%- theme.searchEngine %>";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "<%- theme.homeHost %>";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+                                            <%- css('css/main.css') %>
+											<%- css('css/font-awesome.min.css') %>
+											<%- css('css/darcula.min.css') %>
+											<%- css('css/jquery.fancybox.min.css') %>
+
+											<script src="/js/jquery.min.js" defer></script>
+											<script src="/js/share.js" defer></script>
+											<script src="/js/jquery.fancybox.min.js" defer></script>
+											<script src="/js/highlight.min.js" defer></script>
+											<script src="/js/jquery.pjax.min.js" defer></script>
+											<script src="/js/main.js" defer></script>
+
+
+<!--artalk资源引入-->>
+<%- css('css/artalk.css') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/artalk/2.8.3/Artalk.js"></script>
+
+	<% if (theme.valine){ %>
+		<%- js('https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js') %>
+		<%- js('https://cdn.jsdelivr.net/npm/valine@v1.5.1/dist/Valine.min.js') %>
+	<% } %>
+	<% if (theme.busuanzi){ %>
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	<% } %>
+
+
+	<style>
+		body {
+		  margin: 0;
+		  padding: 0;
+		  position: relative;
+		}
+	
+		body::before {
+		  content: "";
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  width: 100%;
+		  height: 100%;
+		  z-index: -1;
+		  background-image: url('<%- theme.blogBackgroundImage %>');
+		  background-size: <%- theme.blogBackgroundSize %>;
+		  filter: blur(<%- theme.blurAmount %>);
+	  </style>
+
+</head>

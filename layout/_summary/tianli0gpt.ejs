@@ -1,0 +1,10 @@
+<% if (theme.tianligpt && theme.tianligpt.enableComment){ %>
+    <link rel="stylesheet" href="/css/tianli_gpt.css">
+    <script>
+        let tianliGPT_postSelector = '#article-content';
+        let tianliGPT_key = '<%- theme.tianligpt.key %>';
+        let tianliGPT_postURL = "*/posts/*.html";
+        let tianliGPT_wordLimit = 500 ;
+    </script>
+    <script src="https://cdn1.tianli0.top/gh/zhheo/Post-Abstract-AI@0.13/tianli_gpt.js"></script>
+<% } %>

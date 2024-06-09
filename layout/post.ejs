@@ -1,0 +1,121 @@
+<h1 id="article-title">
+  <%- page.title || page.slug.split("/")[page.slug.split("/").length-1] %>
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+
+  <% if (page.cc) {%>
+    <div class="meta-cc">
+      <p class="meta-p">
+        温馨提示：本文适用于
+      </p>
+      <p class="meta-p">
+        <a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode.zh-hans" target="_blank">署名-非商业性使用(BY-NC)</a>
+      </p>
+      <p class="meta-p2">
+        禁止商用-转载请标注出处
+      </p>
+    </div>
+    <%}%>
+
+  <% if (theme.valine && theme.valine.enableCounter){ %>
+    <span>
+      阅读量:<span id="<%= url_for(page.path) %>" class="leancloud_visitors" data-flag-title="<%- page.title %>"></span>
+    </span>
+    <% } %>
+
+      <span><%- config.author %></span>
+      <span><%- date(page.date, "YYYY-MM-DD HH:mm:ss" ) %></span>
+
+      <div id="article-categories">
+        <% if (page.categories) { %>
+          <span>Categories：</span>
+          <% for (var j=0; j < page.categories.data.length; j++) { %>
+              <% if (page.categories.data[j] && page.categories.data[j].name) { %>
+                  <span>
+                      <i class="fa fa-folder" aria-hidden="true">
+                      <a href="/<%- page.categories.data[j].path %>"><%- page.categories.data[j].name %></a>
+                      </i>
+                    <% if (j < page.categories.data.length - 1) { %>
+                      >
+                    <% } %>
+                  </span>
+              <% } %>
+          <% } %>
+        <% } %>
+    
+        <% if (page.tags) { %>
+            <span>Tags：</span>
+            <% for (var j=0; j < page.tags.data.length; j++) { %>
+                <% if (page.tags.data[j] && page.tags.data[j].name) { %>
+                    <span>
+                        <i class="fa fa-tag" aria-hidden="true">
+                        <a href="/<%- page.tags.data[j].path %>"><%- page.tags.data[j].name %></a>
+                        </i>
+                    </span>
+                <% } %>
+            <% } %>
+        <% } %>
+      </div>
+</div>
+
+<% if (page.cover) { %>
+  <img src="<%- page.cover %>" alt="Cover Image" class="page-cover-image">
+  <% } %>
+
+
+    <!-- content -->
+    <div id="article-content">
+      <%- page.content %>
+    </div>
+
+    <% if (theme.postFooter.div) { %>
+      <div id="share-give">
+        <div class="share-button-container">
+          <link rel="stylesheet" type="text/css" href="/css/pach-post.css">
+          <div>
+            <button class="support-button" onclick="openSupportDialog()"><i class="fa fa-qrcode" aria-hidden="true" style="margin-right: 4px;"></i><%- theme.postFooter.likewordA%></button>
+  
+            <div id="support-dialog">
+              <p class="info">
+                <%- config.title %>-<%- theme.postFooter.likewordA%>
+              </p>
+              <div id="image-container">
+                <img class="give-img" src="<%- theme.postFooter.QrcodeA %>" alt="Support Image">
+                <img class="give-img" src="<%- theme.postFooter.QrcodeB %>" alt="Support Image">
+              </div>
+              <p class="like-p"><%- theme.postFooter.yaofan %></p>
+              <button class="close-button" onclick="closeSupportDialog()">好的</button>
+            </div>
+          </div>
+          <button class="share-button" onclick="generateAndCopyLink()"><i class="	fa fa-share-square"aria-hidden="true" style="margin-right: 4px;"></i><%- theme.postFooter.shareword%></button>
+        </div>
+      </div>
+      <% } %>
+
+    <!-- post-guide -->
+    <% if (is_post()){ %>
+      <div class="post-guide">
+        <div class="item left">
+          <% if (page.prev){ %>
+            <a href="<%- url_for(page.prev.path) %>">
+              <i class="fa fa-angle-left" aria-hidden="true"></i>
+              <%- page.prev.title || page.prev.slug.split("/")[page.prev.slug.split("/").length-1] %>
+            </a>
+            <% } %>
+        </div>
+        <div class="item right">
+          <% if (page.next){ %>
+            <a href="<%- url_for(page.next.path) %>">
+              <%- page.next.title || page.next.slug.split("/")[page.prev.slug.split("/").length-1] %>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+            <% } %>
+        </div>
+      </div>
+      <% } %>
+
+      <%- partial('_talk/waline.ejs') %>
+      <%- partial('_talk/valine.ejs') %>
+      <%- partial('_talk/giscus.ejs') %>

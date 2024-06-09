@@ -1,0 +1,90 @@
+<div id="footer">
+	<p>
+		©<span id="footerYear-start"><%- theme.siteStartYear %></span>-<span id="footerYear-end"></span>
+
+		<p>
+			<% if (config.website){ %>
+				<a href='<%- config.website %>' target="_blank"><%- config.author %></a>
+			<% } else { %>
+				<a href="/"><%- config.author %></a>
+			<% } %>
+		
+			<% if (theme.busuanzi){ %>
+				|
+				<span id="busuanzi_container_site_pv">
+					pv
+					<span id="busuanzi_value_site_pv"></span>
+				</span>
+				|
+				<span id="busuanzi_container_site_uv">
+					uv
+					<span id="busuanzi_value_site_uv"></span>
+				</span>
+			<% } %>
+			<br>
+			Theme <a href="//github.com/awaae001/hexo-theme-BTtree" target="_blank">BTTree</a>
+			by <a href="//awaae001.top" target="_blank">awaae001</a>
+			Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+			<!-- 新添加的链接 -->
+			<br>
+			<a href="https://icp.gov.moe/?keyword=" target="_blank">萌ICP备********号</a>
+		</p>
+
+	<!-- 一段用于在页底显示运行时间的代码 by:awaae001 -->
+	<% if (theme.custom.enableRuntimeCard) { %>
+		<div id="runtime-card" style="background-color: #60281e; color: #fff; text-align: center; padding: 10px;">
+			<%- theme.custom.siteword %>：
+			</br>
+				<span id="uptime">加载中...</span>
+		</div>
+		<% } %>
+
+			<script type="text/javascript">
+				const TIME_CONST = 365 * 24 * 60 * 60 * 1000;
+				const TIME_START = new Date("<%- theme.custom.siteStartDate %>");
+
+				function update_website_uptime_banner() {
+					var website_uptime_banner = document.getElementById("uptime");
+					var timestamp_now = new Date(); // 当前时间
+					var time = timestamp_now.getTime() - TIME_START.getTime();
+					var years = time / TIME_CONST;
+					var int_years = parseInt(years);
+					var days = time / (24 * 60 * 60 * 1000); // 计算有多少天
+					var int_days = parseInt(days); // 计算有多少完整的天
+					var hours = (days - int_days) * 24; // 计算除去完整的天 剩下不完整的天有多少 ×24得到有多少个小时
+					var int_hours = parseInt(hours); // 计算完整的小时
+					var mins = (hours - int_hours) * 60; // 计算除去完整的天,小时 剩下不完整的小时 x60得到有多少分钟
+					var int_mins = parseInt(mins); // 计算完整的分钟
+					var sec = (mins - int_mins) * 60; // 计算除去完整的天,小时,分钟 剩下不完整的分钟 x60得到有多少秒
+					var int_sec = parseInt(sec); // 计算完整的秒
+					var msec = (sec - int_sec) * 1000; // 计算除去完整的天,小时,分钟,秒 剩下不完整的秒 x1000得到有多少毫秒
+					var int_msec = parseInt(msec); // 计算完整的毫秒
+
+					website_uptime_banner.innerHTML =
+						int_days +
+						" 日 " +
+						String(int_hours) +
+						" 小时 " +
+						String(int_mins) +
+						" 分 " +
+						String(int_sec) +
+						" 秒 " +
+						String(int_msec).padStart(3, "0") +
+						" 毫秒 (共：" +
+						int_years +
+						" 年)";
+				}
+
+				update_website_uptime_banner();
+				setInterval(update_website_uptime_banner, 1);
+			</script>
+
+					<% if (config.mermaid && config.mermaid.enable) { %>
+						<script
+							src='https://unpkg.com/mermaid@<%= config.mermaid.version %>/dist/mermaid.min.js'></script>
+						<script>
+							if (window.mermaid) {
+								mermaid.initialize({ theme: 'forest' });
+							}
+						</script>
+						<% } %>

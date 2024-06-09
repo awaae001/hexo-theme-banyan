@@ -1,0 +1,30 @@
+<% if (theme.waline && theme.waline.enableComment){ %>
+
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.js" />
+    </head>
+
+    <body>
+        <!-- ... -->
+        <div id="waline"></div>
+        <script type="module">
+            import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.css';
+
+            init({
+                el: '#waline',
+                reaction: true,
+                pageview: true,
+                serverURL: '<%- theme.waline.serverURL %>',
+                dark: 'aton',
+                wordLimit: 150,
+                imageUploader: false,
+                recaptchaV3Key: true,
+
+                emoji: [
+                    '//unpkg.com/@waline/emojis@1.2.0/weibo',
+                    '//unpkg.com/@waline/emojis@1.2.0/bmoji',
+                ],
+            });
+        </script>
+        
+<% } %>

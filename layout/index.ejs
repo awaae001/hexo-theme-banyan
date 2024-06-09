@@ -1,0 +1,58 @@
+
+    <div id="index">
+        <% page.posts.each(function(post){ %>
+            <!-- 博客文章列表项 -->
+            <div class="index-li">
+                <!-- 链接到文章详情页 -->
+                <a href="<%- url_for(post.path) %>" class="post-container">
+                    <!-- 封面图片 -->
+                    <% if (post.cover) { %>
+                        <img src="<%- post.cover %>" alt="Cover Image" class="index-cover-image cover-image">
+                    <% } %>
+                
+                    <!-- 文章内容容器 -->
+                    <div class="post-content">
+                        <!-- 文章标题 -->
+                        <h2 class="index-title">
+                            <%- post.title || post.slug.split("/")[post.slug.split("/").length-1] %>
+                        </h2>
+                
+                        <!-- 文章摘要 -->
+                        <div class="index-brief">
+                            <%- post.more.replace(/<\/?.+?\/?>/g, "").substring(0, 150) %>
+                            ...
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- 文章元信息 -->
+                <div class="article-meta">
+                    <span><%- date(post.date, "YYYY-MM-DD" ) %></span>
+                    <% if (post.categories) { %>
+                        <% for (var j=0; j < post.categories.data.length; j++) { %>
+                            <% if (post.categories.data[j] && post.categories.data[j].name) { %>
+                                <!-- 文章分类 -->
+                                <span>
+                                    <i class="fa fa-folder" aria-hidden="true"></i>
+                                    <a href="/<%- post.categories.data[j].path %>"><%- post.categories.data[j].name %></a>
+                                    <% if (j < post.categories.data.length - 1) { %>
+                                        >
+                                    <% } %>
+                                </span>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        <% }); %>
+
+        <!-- 文章分页 -->
+        <div id="index-paginator">
+            <% if (page.total > 1){ %>
+                <%- paginator({ prev_text: '<' , next_text: '>' }) %>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+<% if (theme.artalk && theme.artalk.enableComment){ %>
+    <!-- Artalk -->
+    <div id="Comments"></div>
+    <script>
+        Artalk.init({
+            el: '#Comments',                // 绑定元素的 Selector
+            pageKey: '',                  // 固定链接 (留空自动获取)
+            pageTitle: '',  // 页面标题 (留空自动获取)
+            server: '<%- theme.artalk.server %>',  // 后端地址
+            site: '<%- theme.artalk.enable %>',             // 你的站点名
+        })
+    </script>
+    <% } %>
